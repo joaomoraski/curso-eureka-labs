@@ -22,7 +22,9 @@ configureRoutes(app)
 
 app.get('/sync', (req, res) => {
   const Categorias = require('./models/categorias')
+  const Produtos = require('./models/produtos')
   Categorias.sync()
+  Produtos.sync()
   res.json({status: "ok"})
 })
 

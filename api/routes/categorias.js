@@ -4,7 +4,7 @@ const Categorias = require("../models/categorias");
 
 router.get("/", async (req, res) => {
   const query = req.query;
-  const categorias = await Categorias.findAll({ where: query });
+  const categorias = await Categorias.findAll({ where: query, include: ['produtos']});
   res.json(categorias);
 });
 
@@ -20,8 +20,8 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-    const categoria = await Categorias.findAll(req.params.id);
-    res.json(await categoria.delete());
+    const id = req.params.id;
+    res.json(await Categorias.destroy({where: {id: id}}));
   });
 
 module.exports = router;
